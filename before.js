@@ -5,14 +5,13 @@ Element.prototype.before = function() {
 
 	for ( var node of arguments ) {
 		if ( typeof node == "string" ) {
-			node = /^<\w+>$/ig.test(node)
+			node = /^<\w+>$/i.test(node)
 				? this.ownerDocument.createElement(node.slice(1, -1))
 				: new Text(node)
 		}
 		
-		frag.appendChild(node)	
-		console.log(node)
+		frag.appendChild(node)
 	}
 
-	this.parentNode.appendChild(frag)
+	this.parentNode.insertBefore(frag, this)
 }
